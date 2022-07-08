@@ -39,6 +39,8 @@ public class Args {
       marshalers.put(elementId, new StringArrayArgumentMarshaler());
     else if (elementTail.equals("&"))
       marshalers.put(elementId, new MapArgumentMarshaler());
+    else if (elementTail.equals("!"))
+      marshalers.put(elementId, new LongArgumentMarshaler());
     else
       throw new ArgsException(INVALID_ARGUMENT_FORMAT, elementId, elementTail);
   }
@@ -110,5 +112,9 @@ public class Args {
 
   public Map<String, String> getMap(char arg) {
     return MapArgumentMarshaler.getValue(marshalers.get(arg));
+  }
+
+  public Long getLong(char arg) {
+    return LongArgumentMarshaler.getValue(marshalers.get(arg));
   }
 }

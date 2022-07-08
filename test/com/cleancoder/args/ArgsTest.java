@@ -1,18 +1,24 @@
 package com.cleancoder.args;
 
+import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.util.Map;
 
 import static com.cleancoder.args.ArgsException.ErrorCode.*;
-import static org.junit.Assert.*;
 
-public class ArgsTest {
+public class ArgsTest extends TestCase {
 
   @Test
   public void testCreateWithNoSchemaOrArguments() throws Exception {
     Args args = new Args("", new String[0]);
     assertEquals(0, args.nextArgument());
+  }
+
+  @Test
+  public void testCreateWithOneLongSchemaAndOneLongArgument() throws Exception {
+    Args args = new Args("l!", new String[] {"-l", "12341234123412"});
+    assertEquals(new Long("12341234123412"), args.getLong('l'));
   }
 
 
